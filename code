@@ -1,0 +1,186 @@
+import matplotlib.pylab as plt
+import networkx as nx
+
+plt.figure(figsize=(20, 8))
+G = nx.Graph()
+
+# nodes (stations) for Piccadilly line
+G.add_node("A1", line="Piccadilly")
+G.add_node("A2", line="Piccadilly")
+G.add_node("A3", line="Piccadilly")
+G.add_node("A4", line="Piccadilly")
+G.add_node("A5", line="Piccadilly")
+G.add_node("A6", line="Piccadilly")
+
+# nodes (stations) for Central line
+G.add_node("B1", line="Central")
+G.add_node("B2", line="Central")
+G.add_node("B3", line="Central")
+G.add_node("B4", line="Central")
+G.add_node("B5", line="Central")
+G.add_node("B6", line="Central")
+
+# nodes (stations) for Northan line
+G.add_node("C1", line="Northan")
+G.add_node("C2", line="Northan")
+G.add_node("C3", line="Northan")
+G.add_node("C4", line="Northan")
+G.add_node("C5", line="Northan")
+G.add_node("C6", line="Northan")
+
+# nodes (stations) for Jubilee line
+G.add_node("D1", line="Jubilee")
+G.add_node("D2", line="Jubilee")
+G.add_node("D3", line="Jubilee")
+G.add_node("D4", line="Jubilee")
+G.add_node("D5", line="Jubilee")
+G.add_node("D6", line="Jubilee")
+
+# connect the nodes together to form the Piccadilly line
+G.add_edge("A1", "A2")
+G.add_edge("A2", "A3")
+G.add_edge("A3", "A4")
+G.add_edge("A4", "A5")
+G.add_edge("A5", "A6")
+
+# connect the nodes together to form the Northan line
+G.add_edge("B1", "B2")
+G.add_edge("B2", "B3")
+G.add_edge("B3", "B4")
+G.add_edge("B4", "B5")
+G.add_edge("B5", "B6")
+
+# connect the nodes together to form the Jubilee line
+G.add_edge("C1", "C2")
+G.add_edge("C2", "C3")
+G.add_edge("C3", "C4")
+G.add_edge("C4", "C5")
+G.add_edge("C5", "C6")
+
+# connect the nodes together to form the Central line
+G.add_edge("D1", "D2")
+G.add_edge("D2", "D3")
+G.add_edge("D3", "D4")
+G.add_edge("D4", "D5")
+G.add_edge("D5", "D6")
+
+# Position for each node
+pos = {
+    "A1": (1, 1),
+    "A2": (4, 5),
+    "A3": (8, 5),
+    "A4": (12, 5),
+    "A5": (14, 8),
+    "A6": (16, 11),
+    "B1": (-1, 3),
+    "B2": (1, 6),
+    "B3": (4, 9),
+    "B4": (7, 9),
+    "B5": (11, 11),
+    "B6": (16, 11),
+    "C1": (12, 9),
+    "C2": (12, 5),
+    "C3": (12, 3),
+    "C4": (12, 0),
+    "C5": (16, 0),
+    "C6": (16, 3),
+    "D1": (4, 9),
+    "D2": (4, 5),
+    "D3": (4, 3),
+    "D4": (4, -1),
+    "D5": (8, -1),
+    "D6": (8, 3)
+}
+
+# Draw the Piccadilly Line with blue nodes
+piccadilly_nodes = [node for node, attr in G.nodes(data=True) if attr['line'] == 'Piccadilly']
+nx.draw_networkx_nodes(G, pos, nodelist=piccadilly_nodes, node_color='blue', node_size=120)
+
+# Draw the Central Line with red nodes
+central_nodes = [node for node, attr in G.nodes(data=True) if attr['line'] == 'Central']
+nx.draw_networkx_nodes(G, pos, nodelist=central_nodes, node_color='red', node_size=120)
+
+# Draw the Northern Line with black nodes
+central_nodes = [node for node, attr in G.nodes(data=True) if attr['line'] == 'Northan']
+nx.draw_networkx_nodes(G, pos, nodelist=central_nodes, node_color='black', node_size=120)
+
+# Draw the Jubilee Line with grey nodes
+central_nodes = [node for node, attr in G.nodes(data=True) if attr['line'] == 'Jubilee']
+nx.draw_networkx_nodes(G, pos, nodelist=central_nodes, node_color='grey', node_size=120)
+
+# Draw the edges for all the lines
+nx.draw_networkx_edges(G, pos, edgelist=[('A1', 'A2'), ('A2', 'A3'), ('A3', 'A4'), ('A4', 'A5'), ('A5', 'A6')], edge_color='blue')
+nx.draw_networkx_edges(G, pos, edgelist=[('B1', 'B2'), ('B2', 'B3'), ('B3', 'B4'), ('B4', 'B5'), ('B5', 'B6')], edge_color='red')
+nx.draw_networkx_edges(G, pos, edgelist=[('C1', 'C2'), ('C2', 'C3'), ('C3', 'C4'), ('C4', 'C5'), ('C5', 'C6')], edge_color='black')
+nx.draw_networkx_edges(G, pos, edgelist=[('D1', 'D2'), ('D2', 'D3'), ('D3', 'D4'), ('D4', 'D5'), ('D5', 'D6')], edge_color='grey')
+
+# Label with xy coordinate to match each node
+plt.annotate('Hyde Park Corner', xy=(1.2, 1), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Green Park', xy=(4.2, 5.2), rotation=15)
+plt.annotate('Piccadilly Circus', xy=(8.2, 5.2), rotation=15)
+plt.annotate('Leicester Square', xy=(12.2, 4.5), rotation=45)
+plt.annotate('Covent Garden', xy=(14.4, 8), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Holborn', xy=(16, 11.4), horizontalalignment='center', verticalalignment='center')
+plt.annotate('Lancaster Gate', xy=(-0.8, 3), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Marble Arch', xy=(1.3, 6), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Bond Street', xy=(4, 9.2), horizontalalignment='center', verticalalignment='bottom')
+plt.annotate('Oxford Circus', xy=(7.4, 8.6), rotation=20)
+plt.annotate('Tottenham Court Road', xy=(11, 11.4), horizontalalignment='right', verticalalignment='center')
+plt.annotate('Tottenham Court Road', xy=(12, 9.6), horizontalalignment='center', verticalalignment='center')
+plt.annotate('Charing Cross', xy=(12.4, 3), rotation=15)
+plt.annotate('Embankment', xy=(12.4, 0.2), rotation=15)
+plt.annotate('Waterloo', xy=(16.4, 0), rotation=15)
+plt.annotate('Kenningtion', xy=(16.2, 3), rotation=15)
+plt.annotate('Westminister', xy=(4.2, 3), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Waterloo', xy=(4, -1.5), horizontalalignment='center', verticalalignment='bottom')
+plt.annotate('Southwark', xy=(8.2, -1), horizontalalignment='left', verticalalignment='center')
+plt.annotate('Londonbridge', xy=(8.2, 3), horizontalalignment='left', verticalalignment='center')
+
+# Edge label for distance between stations
+nx.draw_networkx_edge_labels(
+    G, pos,
+    edge_labels={('A1', 'A2'): '0.5 mi',
+                 ('A2', 'A3'): '0.4 mi',
+                 ('A3', 'A4'): '0.3 mi',
+                 ('A4', 'A5'): '0.2 mi',
+                 ('A5', 'A6'): '0.4 mi',
+                 ('B1', 'B2'): '0.8 mi',
+                 ('B2', 'B3'): '0.4 mi',
+                 ('B3', 'B4'): '0.3 mi',
+                 ('B4', 'B5'): '0.3 mi',
+                 ('B5', 'B6'): '0.4 mi',
+                 ('C1', 'C2'): '0.3 mi',
+                 ('C2', 'C3'): '0.3 mi',
+                 ('C3', 'C4'): '0.2 mi',
+                 ('C4', 'C5'): '0.5 mi',
+                 ('C5', 'C6'): '1.4 mi',
+                 ('D1', 'D2'): '0.6 mi',
+                 ('D2', 'D3'): '1 mi',
+                 ('D3', 'D4'): '0.7 mi',
+                 ('D4', 'D5'): '0.4 mi',
+                 ('D5', 'D6'): '0.9 mi'
+                 },
+    font_color='black'
+)
+
+# 1. Add Title at the top center
+plt.title("London Underground Map Network", fontsize=16, pad=20)
+
+# 2. Proper proxy handles for the legend so line colors and dots show up in the hint box
+legend_handles = [
+    plt.Line2D([0], [0], color='blue', marker='o', markersize=6, label='Piccadilly Line'),
+    plt.Line2D([0], [0], color='red', marker='o', markersize=6, label='Central Line'),
+    plt.Line2D([0], [0], color='black', marker='o', markersize=6, label='Northan Line'),
+    plt.Line2D([0], [0], color='grey', marker='o', markersize=6, label='Jubilee Line')
+]
+plt.legend(handles=legend_handles, loc='upper left', frameon=True)
+
+# 3. Zoom out slightly to give white space around the legend and labels
+plt.xlim(-3, 19)
+plt.ylim(-3, 14)
+
+# 4. Hide coordinate tick values while keeping the outer box border frame
+plt.xticks([])
+plt.yticks([])
+
+plt.show()
